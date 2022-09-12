@@ -1,4 +1,5 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <unistd.h>
 /**
  * main - Prints a string using fprintf
  * Description: This will print the
@@ -8,10 +9,10 @@
  */
 int main(void)
 {
-	#define RED "\e[0;31m"
-	char toPrint =
-	"and that piece of art is useful\" - Dora Korpar, 2015-10-19";
+	char toPrint[] =
+	"and that piece of art is useful\" - Dora Korpar, 2015-10-19\n";
 
-	fprintf(stderr, RED toPrint "\n");
-	return (0);
+	write(2, toPrint, 59);
+
+	return (1);
 }
