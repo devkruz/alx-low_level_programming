@@ -1,28 +1,27 @@
 #include "main.h"
 
 /**
-* print_diagonal - Print  diagonal lines with backslashes
-* @n: Amount of \ to be printed
+* print_diagonal - Draws a diagonal line on the terminal
+* @n: The amount of diagonal to be printed
 * Return: void
 */
 
+
 void print_diagonal(int n)
 {
-	int i = 0, c;
+	int i = 0, j;
 
 	while (i < n && n > 0)
 	{
-		c = 0;
-	while (c < i)
+	for (j = 0; j < i; j++)
 	{
-		_putchar(' ');
-		c++;
+		_putchar (' ');
 	}
-
-		_putchar('\\');
-		_putchar('\n');
+		_putchar ('\\');
+		_putchar ('\n');
 		i++;
 	}
 	if (i == 0)
-		_putchar('\n');
+		_putchar ('\n');
 }
+
