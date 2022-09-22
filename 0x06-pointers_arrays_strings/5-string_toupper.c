@@ -14,10 +14,10 @@ char *string_toupper(char *a)
 
 	while (i < length)
 	{
-		if (a[i] > 65 && a[i] < 90)
+		if (a[i] >= 65 && a[i] <= 90)
 		{
 		}
-		else if (a[i] > 97 && a[i] < 122)
+		else if (a[i] >= 97 && a[i] <= 122)
 		{
 			a[i] -= 32;
 		}
