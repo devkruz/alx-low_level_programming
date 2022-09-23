@@ -1,4 +1,4 @@
-#include "main.h"
+
 #include <stdio.h>
 
 /**
@@ -6,6 +6,8 @@
 *
 * Return: Always 0.
 */
+
+char *_strcat(char *dest, char *src);
 
 int main(void)
 {
