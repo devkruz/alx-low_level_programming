@@ -1,12 +1,11 @@
 
-
 /**
 * leet - Encodes a string into 1337
 * @a: The string to be encoded
 * Return: The encoded string
 */
 
-char *leet(char *)
+char *leet(char *a)
 {
 	int i = 0;
 
