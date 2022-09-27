@@ -6,19 +6,18 @@
 * Return: Always 0.
 */
 
-unsigned int _strspn(char *s, char *accept);
-void simple_print_buffer(char *buffer, unsigned int size);
+char *_strpbrk(char *s, char *accept);
 
 int main(void)
 {
 char *s = "hello, world";
-char *f = "oleh";
-unsigned int n;
+char *f = "world";
+char *t;
 
-n = _strspn(s, f);
-printf("%u\n", n);
+t = _strpbrk(s, f);
+printf("%s\n", t);
 return (0);
-}
+}	
 
 void simple_print_buffer(char *buffer, unsigned int size)
 {
