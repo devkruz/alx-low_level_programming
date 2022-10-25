@@ -3,17 +3,14 @@
 /**
  * first - delete node in the beginnig of a list
  * @head: the head of the linked list
- * @new: the new node
  *
  * Return: the address of the new node
  */
 
 int first(listint_t **head)
 {
-	listint_t *node_head = *head;
-	listint_t *tmp;
+	listint_t *tmp = *head;
 
-	tmp = node_head;
 	*head = (*head)->next;
 	free(tmp);
 	tmp = NULL;
@@ -25,7 +22,6 @@ int first(listint_t **head)
 /**
  * end - delete a node in the end of a list
  * @head: the head of the linked list
- * @new: the new node
  *
  * Return: the address of the new node
  */
@@ -50,7 +46,6 @@ int end(listint_t **head)
 /**
  * at_index - delete a node at an index position
  * @head: the head of the linked list
- * @new_node: the new node
  * @idx: the index to add the new node
  *
  * Return: the address of the new node
@@ -62,17 +57,17 @@ int at_index(listint_t **head, unsigned int idx)
 	listint_t *list_head = *head;
 	listint_t *tmp;
 
-	while (list_head != NULL)
+	while (list_head->next != NULL)
 	{
 
 		if (index_checker == idx - 1)
 		{
-			tmp = node_head->next;
+			tmp = list_head->next;
+			list_head->next =
+			list_head->next->next;
 			free(tmp);
-			node_head = NULL;
+			tmp = NULL;
 			return (1);
-
-
 		}
 
 		list_head = list_head->next;
@@ -83,22 +78,23 @@ int at_index(listint_t **head, unsigned int idx)
 }
 
 /**
- * insert_nodeint_at_index - insert a new node
+ * delete_nodeint_at_index - delete a new node
  * at an index
  * @head: the head of the list
- * @idx: the index to insert the new node
- * @n: the data to be inserted
+ * @index: the index to delete the new node
  *
  * Return: the address of the new node
  */
 
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
+	if (*head == NULL)
+		return (-1);
 
 	if (index == 0)
 		return (first(head));
-	else if (idx >= sizeof(head))
+	else if (index >= sizeof(head))
 		return (end(head));
 	else
-		return (at_index(head, idx));
+		return (at_index(head, index));
 }
