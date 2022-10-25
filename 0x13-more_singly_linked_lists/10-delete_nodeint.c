@@ -1,39 +1,78 @@
 #include "lists.h"
 
 /**
- * delete_nodeint_at_index - delete node at position
- * of index
- * @head: the head of the list
- * @index: the index to be deleted
+ * first - delete node in the beginnig of a list
+ * @head: the head of the linked list
+ * @new: the new node
  *
- * Return: 1 if successful else -1
+ * Return: the address of the new node
  */
 
-
-int delete_nodeint_at_index(listint_t **head, unsigned int index)
+int first(listint_t **head)
 {
-	unsigned int index_checker;
-	listint_t *list_head;
+	listint_t *node_head = *head;
 	listint_t *tmp;
 
-	index_checker = 0;
-	list_head = *head;
+	tmp = node_head;
+	*head = (*head)->next;
+	free(tmp);
+	tmp = NULL;
 
-	if (index == 0)
+	return (1);
+}
+
+
+/**
+ * end - delete a node in the end of a list
+ * @head: the head of the linked list
+ * @new: the new node
+ *
+ * Return: the address of the new node
+ */
+
+int end(listint_t **head)
+{
+	listint_t *node_head = *head;
+	listint_t *tmp;
+
+	while (node_head->next->next != NULL)
+		node_head = node_head->next;
+
+	tmp = node_head->next;
+	free(tmp);
+	node_head = NULL;
+
+	return (1);
+}
+
+
+
+/**
+ * at_index - delete a node at an index position
+ * @head: the head of the linked list
+ * @new_node: the new node
+ * @idx: the index to add the new node
+ *
+ * Return: the address of the new node
+ */
+
+int at_index(listint_t **head, unsigned int idx)
+{
+	unsigned int index_checker = 0;
+	listint_t *list_head = *head;
+	listint_t *tmp;
+
+	while (list_head != NULL)
 	{
-		tmp = (*head)->next;
-		*head = (*head)->next;
-		free(tmp);
-	}
-	while (list_head != NULL && index >= 1)
-	{
-		if (index_checker == index - 1)
+
+		if (index_checker == idx - 1)
 		{
-			tmp = list_head->next;
-			list_head->next =
-			list_head->next->next;
+			tmp = node_head->next;
 			free(tmp);
+			node_head = NULL;
 			return (1);
+
+
 		}
 
 		list_head = list_head->next;
@@ -41,4 +80,25 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	}
 
 	return (-1);
+}
+
+/**
+ * insert_nodeint_at_index - insert a new node
+ * at an index
+ * @head: the head of the list
+ * @idx: the index to insert the new node
+ * @n: the data to be inserted
+ *
+ * Return: the address of the new node
+ */
+
+int delete_nodeint_at_index(listint_t **head, unsigned int index)
+{
+
+	if (index == 0)
+		return (first(head));
+	else if (idx >= sizeof(head))
+		return (end(head));
+	else
+		return (at_index(head, idx));
 }
