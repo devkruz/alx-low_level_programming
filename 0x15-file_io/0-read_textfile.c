@@ -11,32 +11,29 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd1, lettcount, writecount;
-	char *buff = calloc(letters, sizeof(char));
+	size_t writecount = 0;
+	FILE *fp;
+	char c;
 
 
 	if (filename == NULL)
 		return (0);
 
-	if (buff == NULL)
+	fp = fopen(filename, "r");
+
+	if (fp == NULL)
 		return (0);
 
-	fd1 = open(filename, O_RDONLY);
+	while ((EOF != (c = fgetc(fp)))
+	&& (letters != writecount))
+	{
+		if (-1 == write(1, &c, 1))
+			return (0);
+		writecount++;
+	}
 
-	if (fd1 < 0)
-		return (0);
 
-	lettcount = read(fd1, buff, letters);
-
-	if (lettcount < 0)
-		return (0);
-
-	close(fd1);
-
-	writecount = write(1, buff, lettcount);
-
-	if (writecount <= 0)
-		return (0);
+	fclose(fp);
 
 	return (writecount);
 }
