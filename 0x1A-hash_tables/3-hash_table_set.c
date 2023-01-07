@@ -64,10 +64,17 @@ hash_node_t *create_hash_node(const char *key, const char *value)
 		exit(0);
 	new_hash_node->key = malloc(strlen(key) + 1);
 	if (new_hash_node->key == NULL)
+	{
+		free(new_hash_node);
 		exit(0);
+	}
 	new_hash_node->value = malloc(strlen(value) + 1);
 	if (new_hash_node->value == NULL)
+	{
+		free(new_hash_node->key);
+		free(new_hash_node);
 		exit(0);
+	}
 	new_hash_node->next = NULL;
 
 	strcpy(new_hash_node->key, key);
