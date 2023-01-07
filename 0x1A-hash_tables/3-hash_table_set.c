@@ -1,7 +1,7 @@
 #include "hash_tables.h"
 
 /**
- * hash_table_set - adds an element to the hash table
+ * hash_table_set - add/update an element of the hash table
  * @ht: the hash table
  * @key: the node key
  * @value: the node value
@@ -22,12 +22,18 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	index = key_index((unsigned char *)key, size);
 
 	if (ht->array[index] == NULL)
+		/* add new node */
 		ht->array[index] = create_hash_node(key, value);
+	else if ((strcmp((ht->array[index]->key), key)) == 0)
+	{ /* update node */
+		free(ht->array[index]->value);
+		ht->array[index]->value = strdup(value);
+	}
 	else
-	{ /* collission occured */
-		tmp = ht->array[index]->next;
-		ht->array[index]->next = create_hash_node(key, value);
-		ht->array[index]->next->next = tmp;
+	{ /* collission occured  */
+		tmp = ht->array[index];
+		ht->array[index] = create_hash_node(key, value);
+		ht->array[index]->next = tmp;
 	}
 
 	return (1);
