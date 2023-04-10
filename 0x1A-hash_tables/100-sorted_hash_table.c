@@ -98,14 +98,18 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 			if (tmp->snext == NULL)
 			{
-				new_node->snext = NULL;
 				new_node->sprev = tmp;
 				tmp->snext = new_node;
 				ht->stail = new_node;
 			}
-			new_node->snext = tmp;
-			new_node->sprev = tmp->sprev;
-			tmp->sprev = new_node;
+			else
+			{
+				new_node->snext = tmp;
+				new_node->sprev = tmp->sprev;
+				tmp->sprev->snext = new_node;
+				tmp->sprev = new_node;
+			}
+
 		}
 
 	}
