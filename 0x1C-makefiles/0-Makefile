@@ -1,0 +1,5 @@
+
+objects = main.c school.c
+
+all: $(objects)
+	gcc $(objects) -o school
